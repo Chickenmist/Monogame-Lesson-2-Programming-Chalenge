@@ -4,6 +4,9 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Monogame_Lesson_2_Prgramming_Chalenge
 {
+
+    //Wilson
+
     public class Game1 : Game
     {
         private GraphicsDeviceManager _graphics;
@@ -40,6 +43,7 @@ namespace Monogame_Lesson_2_Prgramming_Chalenge
             // TODO: use this.Content to load your game content here
 
             tileTexture = Content.Load<Texture2D>("rectangle");
+            
         }
 
         protected override void Update(GameTime gameTime)
@@ -59,12 +63,23 @@ namespace Monogame_Lesson_2_Prgramming_Chalenge
             // TODO: Add your drawing code here
 
             _spriteBatch.Begin();
-
-            for (int i = 0; i < 640 - tile.Width; i += tile.Width * 2)
+            
+            for (int i = 0; i < 640; i += tile.Width* 2)
             {
-                for (int j = 0; j < 640 - tile.Height; j += tile.Height * 2)
+                for (int j = 0; j < 640; j += tile.Height * 2)
                 {
-                    _spriteBatch.Draw(tileTexture, new Vector2(i,j), Color.White);
+                    _spriteBatch.Draw(tileTexture, tile, Color.White);
+                    
+                    tile = new Rectangle(i + tile.Width, j + tile.Height, 80, 80); //Sets the tile location to the row underneath and off to the side
+                    _spriteBatch.Draw(tileTexture, tile, Color.White);
+                    
+                    tile = new Rectangle(i + tile.Width, j, 80, 80); //Sets the tile location to where the black tiles should be
+                    _spriteBatch.Draw(tileTexture, tile, Color.Black);
+
+                    tile = new Rectangle(i, j + tile.Height, 80, 80); //Sets the tile location to the row underneath
+                    _spriteBatch.Draw(tileTexture, tile, Color.Black);
+
+                    tile = new Rectangle(i, j, 80, 80); //Resets tile location to i and j
                 }
             }
 
